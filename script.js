@@ -14,51 +14,80 @@ function getComputerChoice () {
 
 function getHumanChoice () {
     let human = prompt("Choose rock, paper, or scissors ")
-    return "Your choice was " + human;
+    return human;
 }
 
-console.log(getHumanChoice());
+function scoreKeeper() {
+    if (humanScore > computerScore ) {
+        console.log("You are winning!");
+    } else if (humanScore < computerScore) {
+        console.log("You are loosing! Don't let A.I take over!!");
+    } else if (humanScore == computerScore) {
+        console.log("It's a tie! Lock in!");
+    } else {
+        console.log("Broken");
+    }
+}
 
 let humanScore = 0;
 let computerScore = 0;
 
-let humanAnswer = human;
-let computerAnswer = computer;
-
-// let humanChoice = getHumanChoice();
-// let computerChoice = getComputerChoice();
+let humanSelection = getHumanChoice().toLowerCase();
+let computerSelection = getComputerChoice().toLowerCase();
 
 function PlayRound (humanChoice, computerChoice) {
-    if (humanChoice == "rock" || humanChoice == "Rock" || humanChoice == "ROCK" &&
-        computerChoice == "paper" || computerChoice == "Paper" || computerChoice == "PAPER") {
+    if (humanChoice == "rock" &&
+            computerChoice == "paper") {
             computerScore++;
-            return "You loose! Paper beats rock";
-        }
-    if (humanChoice == "paper" || humanChoice == "Paper" || humanChoice == "PAPER" &&
-        computerChoice == "rock" || computerChoice == "Rock" || computerChoice == "ROCK") {
+            console.log("You loose! Paper beats rock");
+    } else if (humanChoice == "paper" &&
+            computerChoice == "rock") {
             humanScore++;
-            return "You win! Paper beats rock";
-        }
-     if (humanChoice == "scissors" || humanChoice == "Scissors" || humanChoice == "SCISSORS" &&
-        computerChoice == "paper" || computerChoice == "Paper" || computerChoice == "PAPER") {
+            console.log("You win! Paper beats rock");
+    } else if (humanChoice == "scissors" &&
+            computerChoice == "paper") {
             humanScore++;
-            return "You win! Scissors beats paper";
-        }
-    if (humanChoice == "paper" || humanChoice == "Paper" || humanChoice == "PAPER" &&
-        computerChoice == "scissors" || computerChoice == "Scissors" || computerChoice == "SCISSORS") {
+            console.log("You win! Scissors beats paper");
+    } else if (humanChoice == "paper" &&
+            computerChoice == "scissors") {
             computerScore++;
-            return "You loose! Scissors beats paper";
-        }
-    if (humanChoice == "rock" || humanChoice == "Rock" || humanChoice == "ROCK" &&
-        computerChoice == "scissors" || computerChoice == "Scissors" || computerChoice == "SCISSORS") {
+            console.log("You loose! Scissors beats paper"); 
+    } else if (humanChoice == "rock" &&
+            computerChoice == "scissors") {
             humanScore++;
-            return "You win! Rock beats scissors";
-        }
-    if (humanChoice == "scissors" || humanChoice == "Scissors" || humanChoice == "SCISSORS" &&
-        computerChoice == "rock" || computerChoice == "Rock" || computerChoice == "ROCK") {
+            console.log("You win! Rock beats scissors");
+    } else if (humanChoice == "scissors" &&
+            computerChoice == "rock") {
             computerScore++;
-            return "You loose! Rock beats scissors";
+            console.log("You loose! Rock beats scissors");
+        } else if (humanChoice == computerChoice) {
+            console.log("No one wins! Its a tie");
+        } else {
+            console.error("Invalid output");
         }
+    return 0;
 }
-// Try to play one round. Figure out how to get human function to prompt twice
-console.log(PlayRound(humanAnswer, computerAnswer));
+
+function PlayGame() {
+    PlayRound(humanSelection, computerSelection);
+    console.log("The score is " + humanScore + " to " + computerScore);
+    humanSelection = getHumanChoice().toLowerCase();
+    computerSelection = getComputerChoice().toLowerCase();
+    PlayRound(humanSelection, computerSelection);
+    console.log("The score is " + humanScore + " to " + computerScore);
+    humanSelection = getHumanChoice().toLowerCase();
+    computerSelection = getComputerChoice().toLowerCase();
+    PlayRound(humanSelection, computerSelection);
+    console.log("The score is " + humanScore + " to " + computerScore);
+    humanSelection = getHumanChoice().toLowerCase();
+    computerSelection = getComputerChoice().toLowerCase();
+    PlayRound(humanSelection, computerSelection);
+    console.log("The score is " + humanScore + " to " + computerScore);
+    humanSelection = getHumanChoice().toLowerCase();
+    computerSelection = getComputerChoice().toLowerCase();
+    PlayRound(humanSelection, computerSelection);
+    console.log("The score is " + humanScore + " to " + computerScore);
+    scoreKeeper();
+}
+
+PlayGame();
